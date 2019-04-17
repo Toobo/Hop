@@ -65,9 +65,7 @@ that returns `true` when all the combined predicates return true.
 Using these 3 functions the code above can be written like this:
 
 ```php
-use Hop as P;
-
-$strings = array_filter($data, P\chain(P\isType('string'), P\isNotEmpty()));
+$strings = array_filter($data, Hop\chain(Hop\isType('string'), Hop\isNotEmpty()));
 ```
 
 All the functions in this library are in `Hop` namespace.
@@ -75,7 +73,7 @@ All the functions in this library are in `Hop` namespace.
 
 # Installation
 
-Served by Composer using `gmazzap/Hop`.
+Served by Composer using `toobo/hop`.
 
 
 # List of functions
