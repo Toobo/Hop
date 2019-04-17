@@ -1,6 +1,15 @@
 Hop
 =========
 
+---
+[![license](https://img.shields.io/packagist/l/toobo/Hop.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![travis-ci status](https://img.shields.io/travis/Toobo/Hop.svg?style=flat-square)](https://travis-ci.org/Toobo/Hop)
+[![codecov.io](https://img.shields.io/codecov/c/github/Toobo/Hop.svg?style=flat-square)](http://codecov.io/github/Toobo/Hop?branch=master)
+[![release](https://img.shields.io/github/release/Toobo/Hop.svg?style=flat-square)](https://github.com/Toobo/Hop/releases/latest)
+[![packagist](https://img.shields.io/packagist/v/toobo/hop.svg?style=flat-square)](https://packagist.org/packages/toobo/hop)
+[![PHP version requirement](https://img.shields.io/packagist/php-v/toobo/hop.svg?style=flat-square)](https://packagist.org/packages/toobo/hop)
+---
+
 ----------------------------------
 
 > Higher order predicates library.
