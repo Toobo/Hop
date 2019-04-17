@@ -55,12 +55,12 @@ $strings = array_filter($data, function($item) {
 ```
 
 One of the functions of this library is `isType()` that accepts a string representing a type 
-and returns a predicate that can be used to check subjects against that typoe.
+and returns a predicate that can be used to check subjects against that type.
 
 Another of the functions of this library is `isNotEmpty()` that returns a predicate that verifies non-empty values.
 
-Another function is `combine()` that takes an arbitrary number of predicates and returns a predicate
-that returns `true` when all the combined predicates return true.
+Another function is `chain()` that takes an arbitrary number of predicates and returns a predicate
+that returns `true` when _all_ the given predicates return true.
 
 Using these 3 functions the code above can be written like this:
 
