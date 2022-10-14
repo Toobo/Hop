@@ -3,6 +3,7 @@
 
     <file>./src</file>
     <file>./tests</file>
+    <file>./hop.php</file>
 
     <arg value="sp"/>
 
