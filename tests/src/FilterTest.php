@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -17,9 +18,12 @@ use Toobo\Hop as _;
 
 class FilterTest extends TestCase
 {
-    public function testFilterVarWithOptions()
+    /**
+     * @test
+     */
+    public function testFilterVarWithOptions(): void
     {
-        $cb = _\filterVar(FILTER_CALLBACK, ['options' => function (int $value): bool {
+        $cb = _\filterVar(FILTER_CALLBACK, ['options' => static function (int $value): bool {
             return $value % 2 === 0;
         }, ]);
 
@@ -27,7 +31,10 @@ class FilterTest extends TestCase
         static::assertFalse($cb(3));
     }
 
-    public function testIsEmail()
+    /**
+     * @test
+     */
+    public function testIsEmail(): void
     {
         $cb = _\isEmail();
 
@@ -35,7 +42,10 @@ class FilterTest extends TestCase
         static::assertFalse($cb('@info@example.com'));
     }
 
-    public function testIsUrl()
+    /**
+     * @test
+     */
+    public function testIsUrl(): void
     {
         $cb = _\isUrl();
 
@@ -45,7 +55,10 @@ class FilterTest extends TestCase
         static::assertFalse($cb('example .com'));
     }
 
-    public function testIsIp()
+    /**
+     * @test
+     */
+    public function testIsIp(): void
     {
         $cb = _\isIp();
 
@@ -54,7 +67,10 @@ class FilterTest extends TestCase
         static::assertFalse($cb('example.com'));
     }
 
-    public function testIsMac()
+    /**
+     * @test
+     */
+    public function testIsMac(): void
     {
         $cb = _\isMac();
 

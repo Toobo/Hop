@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -17,8 +18,10 @@ use Toobo\Hop as _;
 
 class CompositionTest extends TestCase
 {
-
-    public function testNegateStringCallback()
+    /**
+     * @test
+     */
+    public function testNegateStringCallback(): void
     {
         $notString = _\not('is_string');
 
@@ -29,7 +32,10 @@ class CompositionTest extends TestCase
         static::assertFalse($notString('x'));
     }
 
-    public function testNegateMethodCallback()
+    /**
+     * @test
+     */
+    public function testNegateMethodCallback(): void
     {
         $obj = new class {
             public function isYes(string $what): bool
@@ -45,17 +51,20 @@ class CompositionTest extends TestCase
         static::assertFalse($notYes('yes'));
     }
 
-    public function testChain()
+    /**
+     * @test
+     */
+    public function testChain(): void
     {
-        $notA = function (string $str): bool {
+        $notA = static function (string $str): bool {
             return $str !== 'a';
         };
 
-        $notB = function (string $str): bool {
+        $notB = static function (string $str): bool {
             return $str !== 'b';
         };
 
-        $notC = function (string $str): bool {
+        $notC = static function (string $str): bool {
             return $str !== 'c';
         };
 
@@ -68,17 +77,20 @@ class CompositionTest extends TestCase
         static::assertFalse($chain('c'));
     }
 
-    public function testPool()
+    /**
+     * @test
+     */
+    public function testPool(): void
     {
-        $isA = function (string $str): bool {
+        $isA = static function (string $str): bool {
             return $str === 'a';
         };
 
-        $isB = function (string $str): bool {
+        $isB = static function (string $str): bool {
             return $str === 'b';
         };
 
-        $isC = function (string $str): bool {
+        $isC = static function (string $str): bool {
             return $str === 'c';
         };
 

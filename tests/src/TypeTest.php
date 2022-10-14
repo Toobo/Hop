@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -19,18 +20,19 @@ class TypeTest extends TestCase
 {
     /**
      * @dataProvider typeTestDataProvider
-     * @param string $type
-     * @param mixed $subject
-     * @param bool $expected
+     * @test
      */
-    public function testType(string $type, $subject, bool $expected)
+    public function testType(string $type, mixed $subject, bool $expected): void
     {
         $cb = _\isType($type);
 
         static::assertSame($expected, $cb($subject));
     }
 
-    public function testObjectIs()
+    /**
+     * @test
+     */
+    public function testObjectIs(): void
     {
         $isInterface = _\objectIs(\Countable::class);
         $isClass = _\objectIs(\ArrayObject::class);
@@ -59,11 +61,11 @@ class TypeTest extends TestCase
     {
         // phpcs:enable Inpsyde.CodeQuality.FunctionLength
 
-        $gen1 = function (): \Generator {
+        $gen1 = static function (): \Generator {
             yield 1;
         };
 
-        $gen2 = function (): \Generator {
+        $gen2 = static function (): \Generator {
             yield 2;
         };
 
@@ -137,7 +139,7 @@ class TypeTest extends TestCase
             ['numeric', 'a1', false],
             ['object', new \stdClass(), true],
             ['object', (object)['x' => 'y'], true],
-            ['object', function () {
+            ['object', static function () {
             }, true, ],
             ['object', [], false],
             ['object', \ArrayObject::class, false],

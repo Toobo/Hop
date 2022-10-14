@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -17,8 +18,10 @@ use Toobo\Hop as _;
 
 class ComparisonTest extends TestCase
 {
-
-    public function testIs()
+    /**
+     * @test
+     */
+    public function testIs(): void
     {
         $is = _\is(['foo']);
 
@@ -29,7 +32,10 @@ class ComparisonTest extends TestCase
         static::assertTrue($is(['foo']));
     }
 
-    public function testIsObject()
+    /**
+     * @test
+     */
+    public function testIsObject(): void
     {
         $object = new \ArrayObject(['foo']);
         $is = _\is($object);
@@ -39,7 +45,10 @@ class ComparisonTest extends TestCase
         static::assertTrue($is($object));
     }
 
-    public function testIsNot()
+    /**
+     * @test
+     */
+    public function testIsNot(): void
     {
         $object = new \ArrayObject(['foo']);
         $isNot = _\isNot($object);
@@ -49,7 +58,10 @@ class ComparisonTest extends TestCase
         static::assertFalse($isNot($object));
     }
 
-    public function testEquals()
+    /**
+     * @test
+     */
+    public function testEquals(): void
     {
         $cb = _\equals('');
 
@@ -62,7 +74,10 @@ class ComparisonTest extends TestCase
         static::assertTrue($cb(''));
     }
 
-    public function testEqualsObject()
+    /**
+     * @test
+     */
+    public function testEqualsObject(): void
     {
         $object = new \ArrayObject(['foo']);
         $is = _\equals($object);
@@ -72,7 +87,10 @@ class ComparisonTest extends TestCase
         static::assertTrue($is($object));
     }
 
-    public function testNotEquals()
+    /**
+     * @test
+     */
+    public function testNotEquals(): void
     {
         $cb = _\notEquals('');
 
@@ -84,9 +102,12 @@ class ComparisonTest extends TestCase
         static::assertFalse($cb(null));
     }
 
-    public function testMatch()
+    /**
+     * @test
+     */
+    public function testMatches(): void
     {
-        $match = _\match('/^x[1-9]+x$/');
+        $match = _\matches('/^x[1-9]+x$/');
 
         static::assertFalse($match('_0'));
         static::assertFalse($match('123456'));
@@ -96,16 +117,22 @@ class ComparisonTest extends TestCase
         static::assertTrue($match('x1x'));
     }
 
-    public function testMatchEmpty()
+    /**
+     * @test
+     */
+    public function testMatchesEmpty(): void
     {
-        $match = _\match('');
+        $match = _\matches('');
 
         static::assertFalse($match(''));
     }
 
-    public function testNotMatch()
+    /**
+     * @test
+     */
+    public function testNotMatches(): void
     {
-        $notMatch = _\notMatch('/^x[1-9]+x$/');
+        $notMatch = _\notMatches('/^x[1-9]+x$/');
 
         static::assertTrue($notMatch('_0'));
         static::assertTrue($notMatch('123456'));
@@ -115,20 +142,20 @@ class ComparisonTest extends TestCase
         static::assertFalse($notMatch('x1x'));
     }
 
-    public function testNotMatchEmpty()
+    /**
+     * @test
+     */
+    public function testNotMatchesEmpty(): void
     {
-        $notMatch = _\notMatch('');
+        $notMatch = _\notMatches('');
 
         static::assertTrue($notMatch(''));
     }
 
-    public function testMoreThenFailsWithNonNumericValue()
-    {
-        $this->expectException(\TypeError::class);
-        _\moreThanOrEqual('2');
-    }
-
-    public function testMoreThan()
+    /**
+     * @test
+     */
+    public function testMoreThan(): void
     {
         $cb = _\moreThan(8.5);
 
@@ -140,7 +167,10 @@ class ComparisonTest extends TestCase
         static::assertFalse($cb(-8));
     }
 
-    public function testMoreThanOfEqual()
+    /**
+     * @test
+     */
+    public function testMoreThanOfEqual(): void
     {
         $cb = _\moreThanOrEqual(8.5);
 
@@ -152,7 +182,10 @@ class ComparisonTest extends TestCase
         static::assertFalse($cb(-8));
     }
 
-    public function testLessThan()
+    /**
+     * @test
+     */
+    public function testLessThan(): void
     {
         $cb = _\lessThan(-1);
 
@@ -165,7 +198,10 @@ class ComparisonTest extends TestCase
         static::assertTrue($cb(-2));
     }
 
-    public function testLessThanOrEqual()
+    /**
+     * @test
+     */
+    public function testLessThanOrEqual(): void
     {
         $cb = _\lessThanOrEqual(-1);
 
@@ -178,7 +214,10 @@ class ComparisonTest extends TestCase
         static::assertTrue($cb(-2));
     }
 
-    public function testBetween()
+    /**
+     * @test
+     */
+    public function testBetween(): void
     {
         $cb = _\between(-1, 3);
 
@@ -192,7 +231,10 @@ class ComparisonTest extends TestCase
         static::assertFalse($cb(8));
     }
 
-    public function testBetweenInner()
+    /**
+     * @test
+     */
+    public function testBetweenInner(): void
     {
         $cb = _\betweenInner(-1, 3);
 
@@ -206,7 +248,10 @@ class ComparisonTest extends TestCase
         static::assertFalse($cb(8));
     }
 
-    public function testBetweenLeft()
+    /**
+     * @test
+     */
+    public function testBetweenLeft(): void
     {
         $cb = _\betweenLeft(-1, 3);
 
@@ -220,7 +265,10 @@ class ComparisonTest extends TestCase
         static::assertFalse($cb(8));
     }
 
-    public function testBetweenRight()
+    /**
+     * @test
+     */
+    public function testBetweenRight(): void
     {
         $cb = _\betweenRight(-1, 3);
 

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop package.
  *
@@ -14,59 +15,39 @@ namespace Toobo\Hop;
 
 /**
  * @param string $type
- * @return callable
+ * @return callable(mixed):bool
  *
  * phpcs:disable Generic.Metrics.CyclomaticComplexity
- * phpcs:disable Generic.Metrics.NestingLevel
  */
 function isType(string $type): callable
 {
     // phpcs:enable Generic.Metrics.CyclomaticComplexity
-    // phpcs:enable Generic.Metrics.NestingLevel
-
-    return function ($value) use ($type): bool {
-        switch ($type) {
-            case \Hop\T_STRING:
-                return is_string($value);
-            case \Hop\T_BOOL:
-            case \Hop\T_BOOLEAN:
-                return is_bool($value);
-            case \Hop\T_INT:
-            case \Hop\T_INTEGER:
-                return is_int($value);
-            case \Hop\T_DOUBLE:
-            case \Hop\T_FLOAT:
-                return is_float($value);
-            case \Hop\T_NUMBER:
-            case \Hop\T_NUMERIC:
-                return is_numeric($value);
-            case \Hop\T_RESOURCE:
-                return is_resource($value);
-            case \Hop\T_ARRAY:
-                return is_array($value);
-            case \Hop\T_ARRAY_LIKE:
-                return is_array($value) || $value instanceof \ArrayObject;
-            case \Hop\T_OBJECT:
-                return is_object($value);
-            case \Hop\T_ITERABLE:
-            case \Hop\T_TRAVERSABLE:
-                return is_iterable($value);
-            case \Hop\T_NULL:
-            case \Hop\T_VOID:
-                return $value === null;
-        }
-
-        return is_a($value, $type, true);
+    return static function (mixed $value) use ($type): bool {
+        /** @psalm-suppress ArgumentTypeCoercion */
+        return match ($type) {
+            \Hop\T_STRING => is_string($value),
+            \Hop\T_BOOL, \Hop\T_BOOLEAN => is_bool($value),
+            \Hop\T_INT, \Hop\T_INTEGER => is_int($value),
+            \Hop\T_DOUBLE, \Hop\T_FLOAT => is_float($value),
+            \Hop\T_NUMBER, \Hop\T_NUMERIC => is_numeric($value),
+            \Hop\T_RESOURCE => is_resource($value),
+            \Hop\T_ARRAY => is_array($value),
+            \Hop\T_ARRAY_LIKE => is_array($value) || $value instanceof \ArrayObject,
+            \Hop\T_OBJECT => is_object($value),
+            \Hop\T_ITERABLE, \Hop\T_TRAVERSABLE => is_iterable($value),
+            \Hop\T_NULL, \Hop\T_VOID => $value === null,
+            default => is_a($value, $type, true),
+        };
     };
 }
 
 /**
- * @param string $classOrInterface
- * @return callable
+ * @param class-string $classOrInterface
+ * @return callable(object):bool
  */
 function objectIs(string $classOrInterface): callable
 {
-    return function (object $value) use ($classOrInterface): bool {
+    return static function (object $value) use ($classOrInterface): bool {
         return is_a($value, $classOrInterface, false);
     };
 }

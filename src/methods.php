@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop package.
  *
@@ -14,22 +15,22 @@ namespace Toobo\Hop;
 
 /**
  * @param string $method
- * @return callable
+ * @return callable(object):bool
  */
 function hasMethod(string $method): callable
 {
-    return function (object $object) use ($method) : bool {
+    return static function (object $object) use ($method): bool {
         return method_exists($object, $method);
     };
 }
 
 /**
  * @param string $method
- * @return callable
+ * @return callable(class-string):bool
  */
 function classHasMethod(string $method): callable
 {
-    return function (string $class) use ($method) : bool {
+    return static function (string $class) use ($method): bool {
         return method_exists($class, $method);
     };
 }
@@ -38,11 +39,12 @@ function classHasMethod(string $method): callable
  * @param string $method
  * @param mixed $value
  * @param mixed ...$params
- * @return callable
+ * @return callable(object):bool
  */
-function methodReturns(string $method, $value, ...$params): callable
+function methodReturns(string $method, mixed $value, mixed ...$params): callable
 {
-    return function (object $object) use ($method, $value, $params): bool {
+    return static function (object $object) use ($method, $value, $params): bool {
+        /** @psalm-suppress MixedMethodCall */
         return $object->{$method}(...$params) === $value;
     };
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -17,7 +18,10 @@ use Toobo\Hop as _;
 
 class KeysTest extends TestCase
 {
-    public function testHasKey()
+    /**
+     * @test
+     */
+    public function testHasKey(): void
     {
         $cb = _\hasKey('foo');
 
@@ -25,7 +29,10 @@ class KeysTest extends TestCase
         static::assertFalse($cb(['bar' => 'foo\'']));
     }
 
-    public function testHasNotKey()
+    /**
+     * @test
+     */
+    public function testHasNotKey(): void
     {
         $cb = _\hasNotKey('bar');
 
@@ -33,7 +40,10 @@ class KeysTest extends TestCase
         static::assertFalse($cb(['bar' => 'foo\'']));
     }
 
-    public function testHasAllKeys()
+    /**
+     * @test
+     */
+    public function testHasAllKeys(): void
     {
         $cb = _\hasAllKeys('a', 'b');
 
@@ -41,7 +51,10 @@ class KeysTest extends TestCase
         static::assertFalse($cb(['a' => 1, 'c' => 2]));
     }
 
-    public function testHasAnyOfKeys()
+    /**
+     * @test
+     */
+    public function testHasAnyOfKeys(): void
     {
         $cb = _\hasAnyOfKeys('a', 'b');
 
@@ -49,7 +62,10 @@ class KeysTest extends TestCase
         static::assertFalse($cb(['c' => 1, 'd' => 2]));
     }
 
-    public function testHasNoneOfKeys()
+    /**
+     * @test
+     */
+    public function testHasNoneOfKeys(): void
     {
         $cb = _\hasNoneOfKeys('a', 'b');
 
@@ -57,7 +73,10 @@ class KeysTest extends TestCase
         static::assertTrue($cb(['c' => 1, 'd' => 2]));
     }
 
-    public function testHasNotAllKeys()
+    /**
+     * @test
+     */
+    public function testHasNotAllKeys(): void
     {
         $cb = _\hasNotAllKeys('a', 'c');
 
@@ -65,7 +84,10 @@ class KeysTest extends TestCase
         static::assertFalse($cb(['a' => 1, 'c' => 2]));
     }
 
-    public function testValueForKeyIs()
+    /**
+     * @test
+     */
+    public function testValueForKeyIs(): void
     {
         $cb = _\valueForKeyIs('a', 'A!');
 
@@ -74,7 +96,10 @@ class KeysTest extends TestCase
         static::assertFalse($cb(['b' => 'A!']));
     }
 
-    public function testValueForKeyIsNot()
+    /**
+     * @test
+     */
+    public function testValueForKeyIsNot(): void
     {
         $cb = _\valueForKeyIsNot('a', 'A!');
 
@@ -83,9 +108,12 @@ class KeysTest extends TestCase
         static::assertTrue($cb(['b' => 'A!']));
     }
 
-    public function testApplyOnValueForKey()
+    /**
+     * @test
+     */
+    public function testApplyOnValueForKey(): void
     {
-        $cb = _\applyOnValueForKey('a', function (string $val): bool {
+        $cb = _\applyOnValueForKey('a', static function (string $val): bool {
             return $val === 'A!';
         });
 

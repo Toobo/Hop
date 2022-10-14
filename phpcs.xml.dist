@@ -7,11 +7,23 @@
     <arg value="sp"/>
 
     <rule ref="Inpsyde">
-        <exclude name="WordPress.WP"/>
-        <exclude name="WordPress.XSS"/>
-        <exclude name="WordPress.VIP"/>
-        <exclude name="WordPress.PHP.DiscouragedPHPFunctions"/>
-        <exclude name="Inpsyde.CodeQuality.ArgumentTypeDeclaration"/>
+        <exclude name="WordPress.PHP.NoSilencedErrors" />
+    </rule>
+
+    <rule ref="Inpsyde.CodeQuality.NestingLevel">
+        <properties>
+            <property name="warningLimit" value="4" />
+        </properties>
+    </rule>
+
+    <rule ref="Inpsyde.CodeQuality.Psr4">
+        <properties>
+            <property
+                    name="psr4"
+                    type="array"
+                    value="Toobo\Hop\Tests=>tests/src"
+            />
+        </properties>
     </rule>
 
     <rule ref="Inpsyde.CodeQuality.ElementNameMinimalLength">

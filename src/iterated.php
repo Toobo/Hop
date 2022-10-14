@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop package.
  *
@@ -14,15 +15,12 @@ namespace Toobo\Hop;
 
 /**
  * @param callable $callable
- * @return callable
- *
- * phpcs:disable Generic.Metrics.NestingLevel
+ * @return callable(iterable):bool
  */
 function iterateAndVerifyAll(callable $callable): callable
 {
-    // phpcs:enable Generic.Metrics.NestingLevel
-
-    return function (iterable $value) use ($callable): bool {
+    return static function (iterable $value) use ($callable): bool {
+        /** @var mixed $item */
         foreach ($value as $item) {
             if (!$callable($item)) {
                 return false;
@@ -35,15 +33,12 @@ function iterateAndVerifyAll(callable $callable): callable
 
 /**
  * @param callable $callable
- * @return \Closure
- *
- * phpcs:disable Generic.Metrics.NestingLevel
+ * @return callable(iterable):bool
  */
 function iterateAndVerifyAny(callable $callable): callable
 {
-    // phpcs:enable Generic.Metrics.NestingLevel
-
-    return function (iterable $value) use ($callable): bool {
+    return static function (iterable $value) use ($callable): bool {
+        /** @var mixed $item */
         foreach ($value as $item) {
             if ($callable($item)) {
                 return true;

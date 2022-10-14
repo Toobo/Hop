@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop package.
  *
@@ -18,11 +19,11 @@ namespace Toobo\Hop;
  *
  * @param  callable $transformation
  * @param  callable $predicate
- * @return callable
+ * @return callable(mixed):bool
  */
 function applyAfter(callable $transformation, callable $predicate): callable
 {
-    return function ($value) use ($transformation, $predicate): bool {
+    return static function (mixed $value) use ($transformation, $predicate): bool {
         return (bool)$predicate($transformation($value));
     };
 }
@@ -34,11 +35,12 @@ function applyAfter(callable $transformation, callable $predicate): callable
  * @param string $method
  * @param callable $predicate
  * @param mixed ...$params
- * @return callable
+ * @return callable(object):bool
  */
-function applyAfterMethod(string $method, callable $predicate, ...$params): callable
+function applyAfterMethod(string $method, callable $predicate, mixed ...$params): callable
 {
-    return function (object $object) use ($method, $predicate, $params): bool {
+    return static function (object $object) use ($method, $predicate, $params): bool {
+        /** @psalm-suppress MixedMethodCall */
         return (bool)$predicate($object->{$method}(...$params));
     };
 }

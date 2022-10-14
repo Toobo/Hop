@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop package.
  *
@@ -12,138 +13,112 @@ declare(strict_types=1);
 
 namespace Toobo\Hop;
 
-use function Toobo\Hop\Utils\assertNumeric;
-
 /**
  * @param mixed $compare
- * @return callable
+ * @return callable(mixed):bool
  */
-function is($compare): callable
+function is(mixed $compare): callable
 {
-    return function ($value) use ($compare): bool {
+    return static function (mixed $value) use ($compare): bool {
         return $value === $compare;
     };
 }
 
 /**
  * @param mixed $compare
- * @return \callable
+ * @return callable(mixed):bool
  */
-function isNot($compare): callable
+function isNot(mixed $compare): callable
 {
-    return function ($value) use ($compare): bool {
+    return static function (mixed $value) use ($compare): bool {
         return $value !== $compare;
     };
 }
 
 /**
- * @param $compare
- * @return callable
+ * @param mixed $compare
+ * @return callable(mixed):bool
  */
-function equals($compare): callable
+function equals(mixed $compare): callable
 {
-    return function ($value) use ($compare): bool {
+    return static function (mixed $value) use ($compare): bool {
         return $value == $compare; // phpcs:ignore
     };
 }
 
 /**
- * @param $compare
- * @return callable
+ * @param mixed $compare
+ * @return callable(mixed):bool
  */
-function notEquals($compare): callable
+function notEquals(mixed $compare): callable
 {
-    return function ($value) use ($compare): bool {
+    return static function (mixed $value) use ($compare): bool {
         return $value != $compare; // phpcs:ignore
     };
 }
 
 /**
  * @param string $regex
- * @return callable
+ * @return callable(string):bool
  */
-function match(string $regex): callable
+function matches(string $regex): callable
 {
-    if (!$regex) {
-        return never();
-    }
-
-    return function (string $value) use ($regex): bool {
-        return @preg_match($regex, $value) > 0;
+    return static function (string $value) use ($regex): bool {
+        return $regex && (@preg_match($regex, $value) > 0);
     };
 }
 
 /**
  * @param string $regex
- * @return callable
+ * @return callable(string):bool
  */
-function notMatch(string $regex): callable
+function notMatches(string $regex): callable
 {
-    if (!$regex) {
-        return always();
-    }
-
-    return function (string $value) use ($regex): bool {
-        return @preg_match($regex, $value) === 0;
+    return static function (string $value) use ($regex): bool {
+        return !$regex || (@preg_match($regex, $value) === 0);
     };
 }
 
 /**
  * @param int|float $limit
- * @return callable
+ * @return callable(int|float):bool
  */
-function moreThan($limit): callable
+function moreThan(int|float $limit): callable
 {
-    assertNumeric($limit, 'Toobo\Hop\moreThan');
-
-    return function ($value) use ($limit): bool {
-        assertNumeric($value, 'predicate returned by  Toobo\Hop\moreThan');
-
+    return static function (int|float $value) use ($limit): bool {
         return $value > $limit;
     };
 }
 
 /**
  * @param int|float $limit
- * @return callable
+ * @return callable(int|float):bool
  */
-function moreThanOrEqual($limit): callable
+function moreThanOrEqual(int|float $limit): callable
 {
-    assertNumeric($limit, 'Toobo\Hop\moreThanOrEqual');
-
-    return function ($value) use ($limit): bool {
-        assertNumeric($value, 'predicate returned by  Toobo\Hop\moreThanOrEqual');
-
+    return static function (int|float $value) use ($limit): bool {
         return $value >= $limit;
     };
 }
 
 /**
  * @param int|float $limit
- * @return callable
+ * @return callable(int|float):bool
  */
-function lessThan($limit): callable
+function lessThan(int|float $limit): callable
 {
-    assertNumeric($limit, 'Toobo\Hop\lessThan');
-
-    return function ($value) use ($limit): bool {
-        assertNumeric($value, 'predicate returned by Toobo\Hop\lessThan');
-
+    return static function (int|float $value) use ($limit): bool {
         return $value < $limit;
     };
 }
 
 /**
  * @param int|float $limit
- * @return callable
+ * @return callable(int|float):bool
  */
-function lessThanOrEqual($limit): callable
+function lessThanOrEqual(int|float $limit): callable
 {
-    assertNumeric($limit, 'Toobo\Hop\lessThanOrEqual');
-
-    return function ($value) use ($limit): bool {
-        assertNumeric($value, 'predicate returned by Toobo\Hop\lessThanOrEqual');
-
+    return static function (int|float $value) use ($limit): bool {
         return $value <= $limit;
     };
 }
@@ -151,7 +126,7 @@ function lessThanOrEqual($limit): callable
 /**
  * @param int $min
  * @param int $max
- * @return callable
+ * @return callable(int):bool
  */
 function between(int $min, int $max): callable
 {
@@ -161,7 +136,7 @@ function between(int $min, int $max): callable
 /**
  * @param int $min
  * @param int $max
- * @return callable
+ * @return callable(int):bool
  */
 function betweenInner(int $min, int $max): callable
 {
@@ -171,7 +146,7 @@ function betweenInner(int $min, int $max): callable
 /**
  * @param int $min
  * @param int $max
- * @return callable
+ * @return callable(int):bool
  */
 function betweenLeft(int $min, int $max): callable
 {

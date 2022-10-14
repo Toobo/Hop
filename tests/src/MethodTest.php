@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -17,7 +18,10 @@ use Toobo\Hop as _;
 
 class MethodTest extends TestCase
 {
-    public function testHasMethod()
+    /**
+     * @test
+     */
+    public function testHasMethod(): void
     {
         $cb = _\hasMethod('getArrayCopy');
 
@@ -25,7 +29,10 @@ class MethodTest extends TestCase
         static::assertFalse($cb(new \stdClass()));
     }
 
-    public function testClassHasMethod()
+    /**
+     * @test
+     */
+    public function testClassHasMethod(): void
     {
         $cb = _\classHasMethod('getArrayCopy');
 
@@ -33,7 +40,10 @@ class MethodTest extends TestCase
         static::assertFalse($cb(\stdClass::class));
     }
 
-    public function testMethodReturns()
+    /**
+     * @test
+     */
+    public function testMethodReturns(): void
     {
         $by2 = new class {
             public function test(int $value): int

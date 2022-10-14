@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -17,19 +18,25 @@ use Toobo\Hop as _;
 
 class MiscTest extends TestCase
 {
-    public function testApplyAfter()
+    /**
+     * @test
+     */
+    public function testApplyAfter(): void
     {
-        $cb = _\applyAfter('strrev', function (string $str): bool {
-            return strpos($str, 'a') === 0;
+        $cb = _\applyAfter('strrev', static function (string $str): bool {
+            return str_starts_with($str, 'a');
         });
 
         static::assertTrue($cb('d-c-b-a'));
         static::assertFalse($cb('a-b-c-d'));
     }
 
-    public function testApplyAfterMethod()
+    /**
+     * @test
+     */
+    public function testApplyAfterMethod(): void
     {
-        $cb = _\applyAfterMethod('getArrayCopy', function (array $arr): bool {
+        $cb = _\applyAfterMethod('getArrayCopy', static function (array $arr): bool {
             return ($arr['x'] ?? 1) === 2;
         });
 

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -18,8 +19,10 @@ use Toobo\Hop as _;
 
 class SizeTest extends TestCase
 {
-
-    public function testSize()
+    /**
+     * @test
+     */
+    public function testSize(): void
     {
         $cb = _\size(2);
 
@@ -31,7 +34,10 @@ class SizeTest extends TestCase
         static::assertFalse($cb(new \ArrayIterator(['a'])));
     }
 
-    public function testSmallerThan()
+    /**
+     * @test
+     */
+    public function testSmallerThan(): void
     {
         $cb = _\smallerThan(3);
 
@@ -43,7 +49,10 @@ class SizeTest extends TestCase
         static::assertFalse($cb(new \ArrayIterator(['a', 'b', 'c'])));
     }
 
-    public function testSmallerThanOrEqual()
+    /**
+     * @test
+     */
+    public function testSmallerThanOrEqual(): void
     {
         $cb = _\smallerThanOrEqual(3);
 
@@ -55,7 +64,10 @@ class SizeTest extends TestCase
         static::assertFalse($cb(new \ArrayIterator(['a', 'b', 'c', 'd', 'e'])));
     }
 
-    public function testBiggerThan()
+    /**
+     * @test
+     */
+    public function testBiggerThan(): void
     {
         $cb = _\biggerThan(2);
 
@@ -67,7 +79,10 @@ class SizeTest extends TestCase
         static::assertFalse($cb(new \ArrayIterator(['a'])));
     }
 
-    public function testBiggerThanOrEqual()
+    /**
+     * @test
+     */
+    public function testBiggerThanOrEqual(): void
     {
         $cb = _\biggerThanOrEqual(3);
 
@@ -79,7 +94,10 @@ class SizeTest extends TestCase
         static::assertFalse($cb(new \ArrayIterator([])));
     }
 
-    public function testSizeBetween()
+    /**
+     * @test
+     */
+    public function testSizeBetween(): void
     {
         $cb = _\sizeBetween(2, 4);
 
@@ -91,7 +109,10 @@ class SizeTest extends TestCase
         static::assertFalse($cb(new \ArrayIterator([])));
     }
 
-    public function testSizeBetweenInner()
+    /**
+     * @test
+     */
+    public function testSizeBetweenInner(): void
     {
         $cb = _\sizeBetweenInner(2, 5);
 
@@ -103,7 +124,10 @@ class SizeTest extends TestCase
         static::assertFalse($cb(new \ArrayIterator(['a'])));
     }
 
-    public function testSizeBetweenLeft()
+    /**
+     * @test
+     */
+    public function testSizeBetweenLeft(): void
     {
         $cb = _\sizeBetweenLeft(2, 5);
 
@@ -115,7 +139,10 @@ class SizeTest extends TestCase
         static::assertFalse($cb(new \ArrayIterator([])));
     }
 
-    public function testSizeBetweenRight()
+    /**
+     * @test
+     */
+    public function testSizeBetweenRight(): void
     {
         $cb = _\sizeBetweenRight(2, 5);
 
@@ -127,7 +154,10 @@ class SizeTest extends TestCase
         static::assertFalse($cb(new \ArrayIterator(['a', 'b', 'c', 'd', 'e', 'f'])));
     }
 
-    public function testSizeFailForWrongType()
+    /**
+     * @test
+     */
+    public function testSizeFailForWrongType(): void
     {
         $cb = _\size(2);
 

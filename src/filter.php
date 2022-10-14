@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop package.
  *
@@ -15,56 +16,54 @@ namespace Toobo\Hop;
 /**
  * @param int $filter
  * @param array|int $options
- * @return callable
+ * @return callable(mixed):bool
  */
-function filterVar(int $filter, $options = null): callable
+function filterVar(int $filter, array|int $options = FILTER_UNSAFE_RAW): callable
 {
-    return function ($value) use ($filter, $options): bool {
+    return static function (mixed $value) use ($filter, $options): bool {
         return (bool)filter_var($value, $filter, $options);
     };
 }
 
 /**
- * @return callable
+ * @return callable(string):bool
  */
 function isEmail(): callable
 {
-    return function ($value): bool {
+    return static function (string $value): bool {
         return (bool)filter_var($value, FILTER_VALIDATE_EMAIL);
     };
 }
 
 /**
- * @return callable
+ * @return callable(string):bool
  */
 function isUrl(): callable
 {
-    return function (string $value): bool {
+    return static function (string $value): bool {
         // FILTER_VALIDATE_URL does not recognize protocol-relative urls
-        if (strpos($value, '//') === 0) {
-            $value = "http:{$value}";
-        }
+        str_starts_with($value, '//') and $value = "http:{$value}";
 
         return (bool)filter_var($value, FILTER_VALIDATE_URL);
     };
 }
 
 /**
- * @return callable
+ * @return callable(string):bool
  */
 function isIp(): callable
 {
-    return function ($value): bool {
+    return static function (string $value): bool {
         return (bool)filter_var($value, FILTER_VALIDATE_IP);
     };
 }
 
 /**
- * @return callable
+ * @return callable(string):bool
  */
 function isMac(): callable
 {
-    return function ($value): bool {
+    return static function (string $value): bool {
         return (bool)filter_var($value, FILTER_VALIDATE_MAC);
     };
 }

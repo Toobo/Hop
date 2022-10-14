@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop package.
  *
@@ -13,83 +14,73 @@ declare(strict_types=1);
 namespace Toobo\Hop;
 
 /**
- * @return callable
+ * @return callable():bool
  */
 function always(): callable
 {
-    return function (): bool {
+    return static function (): bool {
         return true;
     };
 }
 
 /**
- * @return callable
+ * @return callable():bool
  */
 function never(): callable
 {
-    return function (): bool {
+    return static function (): bool {
         return false;
     };
 }
 
 /**
- * @return callable
+ * @return callable(mixed):bool
  */
 function isEmpty(): callable
 {
-    return function ($value): bool {
+    return static function (mixed $value): bool {
         return !$value && $value !== '0';
     };
 }
 
 /**
- * @return callable
+ * @return callable(mixed):bool
  */
 function isNotEmpty(): callable
 {
-    return function ($value): bool {
+    return static function (mixed $value): bool {
         return $value || $value === '0';
     };
 }
 
 /**
- * @return callable
+ * @return callable(mixed):bool
  */
 function isTrueish(): callable
 {
-    return function ($value): bool {
-        $filtered = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-
-        return $filtered ?? false;
+    return static function (mixed $value): bool {
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? false;
     };
 }
 
 /**
- * @return callable
+ * @return callable(mixed):bool
  */
 function isFalsey(): callable
 {
-    return function ($value): bool {
-        if ($value === null) {
-            return false;
-        }
-
-        $filtered = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-
-        return $filtered === null ? false : !$filtered;
+    return static function (mixed $value): bool {
+        return ($value !== null)
+            && (filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) === false);
     };
 }
 
 /**
- * @return callable
+ * @return callable(mixed):bool
  */
 function isBooleanLooking(): callable
 {
-    return function ($value): bool {
-        if ($value === null) {
-            return false;
-        }
-
-        return filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) !== null;
+    return static function (mixed $value): bool {
+        return ($value !== null)
+            && filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) !== null;
     };
 }

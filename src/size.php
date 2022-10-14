@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop package.
  *
@@ -14,55 +15,55 @@ namespace Toobo\Hop;
 
 /**
  * @param int $size
- * @return callable
+ * @return callable(mixed):bool
  */
 function size(int $size): callable
 {
-    return function ($value) use ($size): bool {
+    return static function (mixed $value) use ($size): bool {
         return Utils\measure($value, 'Toobo\Hop\size') === $size;
     };
 }
 
 /**
  * @param int $max
- * @return callable
+ * @return callable(mixed):bool
  */
 function smallerThan(int $max): callable
 {
-    return function ($value) use ($max): bool {
+    return static function (mixed $value) use ($max): bool {
         return Utils\measure($value, 'Toobo\Hop\smallerThan') < $max;
     };
 }
 
 /**
  * @param int $max
- * @return callable
+ * @return callable(mixed):bool
  */
 function smallerThanOrEqual(int $max): callable
 {
-    return function ($value) use ($max): bool {
+    return static function (mixed $value) use ($max): bool {
         return Utils\measure($value, 'Toobo\Hop\smallerThanOrEqual') <= $max;
     };
 }
 
 /**
  * @param int $min
- * @return callable
+ * @return callable(mixed):bool
  */
 function biggerThan(int $min): callable
 {
-    return function ($value) use ($min): bool {
+    return static function (mixed $value) use ($min): bool {
         return Utils\measure($value, 'Toobo\Hop\biggerThan') > $min;
     };
 }
 
 /**
  * @param int $min
- * @return callable
+ * @return callable(mixed):bool
  */
 function biggerThanOrEqual(int $min): callable
 {
-    return function ($value) use ($min): bool {
+    return static function (mixed $value) use ($min): bool {
         return Utils\measure($value, 'Toobo\Hop\biggerThanOrEqual') >= $min;
     };
 }
@@ -70,7 +71,7 @@ function biggerThanOrEqual(int $min): callable
 /**
  * @param int $min
  * @param int $max
- * @return callable
+ * @return callable(mixed):bool
  */
 function sizeBetween(int $min, int $max): callable
 {
@@ -80,7 +81,7 @@ function sizeBetween(int $min, int $max): callable
 /**
  * @param int $min
  * @param int $max
- * @return callable
+ * @return callable(mixed):bool
  */
 function sizeBetweenInner(int $min, int $max): callable
 {
@@ -90,7 +91,7 @@ function sizeBetweenInner(int $min, int $max): callable
 /**
  * @param int $min
  * @param int $max
- * @return callable
+ * @return callable(mixed):bool
  */
 function sizeBetweenLeft(int $min, int $max): callable
 {
@@ -100,7 +101,7 @@ function sizeBetweenLeft(int $min, int $max): callable
 /**
  * @param int $min
  * @param int $max
- * @return callable
+ * @return callable(mixed):bool
  */
 function sizeBetweenRight(int $min, int $max): callable
 {

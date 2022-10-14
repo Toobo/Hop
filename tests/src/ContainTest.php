@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -17,8 +18,10 @@ use Toobo\Hop as _;
 
 class ContainTest extends TestCase
 {
-
-    public function testContains()
+    /**
+     * @test
+     */
+    public function testContains(): void
     {
         $cb = _\contains('foo');
 
@@ -30,15 +33,10 @@ class ContainTest extends TestCase
         static::assertTrue($cb('abc foo bar'));
     }
 
-    public function testHasFailsWithWrongType()
-    {
-        $cb = _\has(1);
-
-        $this->expectException(\TypeError::class);
-        $cb(new \ArrayObject([1]));
-    }
-
-    public function testHasOnArray()
+    /**
+     * @test
+     */
+    public function testHasOnArray(): void
     {
         $cb = _\has(1);
 
@@ -50,7 +48,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb([11]));
     }
 
-    public function testStartWithLetter()
+    /**
+     * @test
+     */
+    public function testStartWithLetter(): void
     {
         $cb = _\startsWith('X');
 
@@ -64,7 +65,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb('ZYX'));
     }
 
-    public function testStartWithText()
+    /**
+     * @test
+     */
+    public function testStartWithText(): void
     {
         $cb = _\startsWith('Hi');
 
@@ -77,7 +81,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb(" Hi"));
     }
 
-    public function testEndsWithLetter()
+    /**
+     * @test
+     */
+    public function testEndsWithLetter(): void
     {
         $cb = _\endsWith('X');
 
@@ -93,7 +100,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb('XYZ'));
     }
 
-    public function testEndsWithText()
+    /**
+     * @test
+     */
+    public function testEndsWithText(): void
     {
         $cb = _\endsWith('sùrè!');
 
@@ -107,7 +117,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb("Do\nthis\n\works?\nsure!"));
     }
 
-    public function testHeadIsSingleItem()
+    /**
+     * @test
+     */
+    public function testHeadIsSingleItem(): void
     {
         $cb = _\headIs('x');
 
@@ -115,10 +128,12 @@ class ContainTest extends TestCase
         static::assertTrue($cb(['x']));
         static::assertFalse($cb(['X']));
         static::assertFalse($cb(['y', 'x']));
-        ;
     }
 
-    public function testHeadIsMoreItems()
+    /**
+     * @test
+     */
+    public function testHeadIsMoreItems(): void
     {
         $cb = _\headIs('x', 'y');
 
@@ -129,7 +144,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb(['y', 'x']));
     }
 
-    public function testTailIsSingleItem()
+    /**
+     * @test
+     */
+    public function testTailIsSingleItem(): void
     {
         $cb = _\tailIs('z');
 
@@ -139,7 +157,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb(['z', 'y']));
     }
 
-    public function testTailIsMoreItems()
+    /**
+     * @test
+     */
+    public function testTailIsMoreItems(): void
     {
         $cb = _\tailIs('y', 'z');
 
@@ -150,7 +171,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb(['y', 'z', 'a']));
     }
 
-    public function testIn()
+    /**
+     * @test
+     */
+    public function testIn(): void
     {
         $cb = _\in(...range('a', 'd'));
 
@@ -161,7 +185,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb('e'));
     }
 
-    public function testNotIn()
+    /**
+     * @test
+     */
+    public function testNotIn(): void
     {
         $cb = _\notIn(...range('a', 'd'));
 
@@ -173,7 +200,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb('d'));
     }
 
-    public function testIntersect()
+    /**
+     * @test
+     */
+    public function testIntersect(): void
     {
         $cb = _\intersect(...range('b', 'e'));
 
@@ -190,7 +220,10 @@ class ContainTest extends TestCase
         static::assertFalse($cb(['B', 'C', 'D', 'E']));
     }
 
-    public function testNotIntersect()
+    /**
+     * @test
+     */
+    public function testNotIntersect(): void
     {
         $cb = _\notIntersect(...range('b', 'e'));
 

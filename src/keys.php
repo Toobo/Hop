@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop package.
  *
@@ -14,37 +15,33 @@ namespace Toobo\Hop;
 
 /**
  * @param string $key
- * @return callable
+ * @return callable(array):bool
  */
 function hasKey(string $key): callable
 {
-    return function (array $value) use ($key): bool {
+    return static function (array $value) use ($key): bool {
         return array_key_exists($key, $value);
     };
 }
 
 /**
  * @param string $key
- * @return callable
+ * @return callable(array):bool
  */
 function hasNotKey(string $key): callable
 {
-    return function (array $value) use ($key): bool {
+    return static function (array $value) use ($key): bool {
         return !array_key_exists($key, $value);
     };
 }
 
 /**
- * @param string[] $keys
- * @return callable
- *
- * phpcs:disable Generic.Metrics.NestingLevel
+ * @param list<string> $keys
+ * @return callable(array):bool
  */
 function hasAllKeys(string ...$keys): callable
 {
-    // phpcs:enable Generic.Metrics.NestingLevel
-
-    return function (array $value) use ($keys): bool {
+    return static function (array $value) use ($keys): bool {
         foreach ($keys as $key) {
             if (!array_key_exists($key, $value)) {
                 return false;
@@ -56,16 +53,12 @@ function hasAllKeys(string ...$keys): callable
 }
 
 /**
- * @param string[] $keys
- * @return callable
- *
- * phpcs:disable Generic.Metrics.NestingLevel
+ * @param list<string> $keys
+ * @return callable(array):bool
  */
 function hasAnyOfKeys(string ...$keys): callable
 {
-    // phpcs:enable Generic.Metrics.NestingLevel
-
-    return function (array $value) use ($keys): bool {
+    return static function (array $value) use ($keys): bool {
         foreach ($keys as $key) {
             if (array_key_exists($key, $value)) {
                 return true;
@@ -77,16 +70,12 @@ function hasAnyOfKeys(string ...$keys): callable
 }
 
 /**
- * @param string[] $keys
- * @return callable
- *
- * phpcs:disable Generic.Metrics.NestingLevel
+ * @param list<string> $keys
+ * @return callable(array):bool
  */
 function hasNoneOfKeys(string ...$keys): callable
 {
-    // phpcs:enable Generic.Metrics.NestingLevel
-
-    return function (array $value) use ($keys): bool {
+    return static function (array $value) use ($keys): bool {
         foreach ($keys as $key) {
             if (array_key_exists($key, $value)) {
                 return false;
@@ -98,16 +87,12 @@ function hasNoneOfKeys(string ...$keys): callable
 }
 
 /**
- * @param string[] $keys
- * @return \Closure
- *
- * phpcs:disable Generic.Metrics.NestingLevel
+ * @param list<string> $keys
+ * @return callable(array):bool
  */
 function hasNotAllKeys(string ...$keys): callable
 {
-    // phpcs:enable Generic.Metrics.NestingLevel
-
-    return function (array $value) use ($keys): bool {
+    return static function (array $value) use ($keys): bool {
         foreach ($keys as $key) {
             if (!array_key_exists($key, $value)) {
                 return true;
@@ -120,37 +105,35 @@ function hasNotAllKeys(string ...$keys): callable
 
 /**
  * @param string $key
- * @param $value
- * @return callable
+ * @param mixed $value
+ * @return callable(array):bool
  */
-function valueForKeyIs(string $key, $value): callable
+function valueForKeyIs(string $key, mixed $value): callable
 {
-    return function (array $array) use ($key, $value): bool {
-
+    return static function (array $array) use ($key, $value): bool {
         return array_key_exists($key, $array) && $array[$key] === $value;
     };
 }
 /**
  * @param string $key
- * @param $item
- * @return callable
+ * @param mixed $item
+ * @return callable(array):bool
  */
-function valueForKeyIsNot(string $key, $item): callable
+function valueForKeyIsNot(string $key, mixed $item): callable
 {
-    return function (array $value) use ($key, $item): bool {
-
+    return static function (array $value) use ($key, $item): bool {
         return !array_key_exists($key, $value) || $value[$key] !== $item;
     };
 }
 
 /**
- * @param string   $key
+ * @param string $key
  * @param callable $callback
- * @return callable
+ * @return callable(array):bool
  */
 function applyOnValueForKey(string $key, callable $callback): callable
 {
-    return function (array $value) use ($key, $callback): bool {
+    return static function (array $value) use ($key, $callback): bool {
         if (!array_key_exists($key, $value)) {
             return false;
         }

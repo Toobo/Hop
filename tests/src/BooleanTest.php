@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -17,7 +18,10 @@ use Toobo\Hop as _;
 
 class BooleanTest extends TestCase
 {
-    public function testAlways()
+    /**
+     * @test
+     */
+    public function testAlways(): void
     {
         $cb = _\always();
 
@@ -26,7 +30,10 @@ class BooleanTest extends TestCase
         static::assertTrue($cb());
     }
 
-    public function testNever()
+    /**
+     * @test
+     */
+    public function testNever(): void
     {
         $cb = _\never();
 
@@ -35,7 +42,10 @@ class BooleanTest extends TestCase
         static::assertFalse($cb());
     }
 
-    public function testIsEmpty()
+    /**
+     * @test
+     */
+    public function testIsEmpty(): void
     {
         $cb = _\isEmpty();
 
@@ -50,7 +60,10 @@ class BooleanTest extends TestCase
         static::assertFalse($cb(new \stdClass()));
     }
 
-    public function testIsNotEmpty()
+    /**
+     * @test
+     */
+    public function testIsNotEmpty(): void
     {
         $cb = _\isNotEmpty();
 
@@ -65,7 +78,10 @@ class BooleanTest extends TestCase
         static::assertTrue($cb(new \stdClass()));
     }
 
-    public function testIsTrueish()
+    /**
+     * @test
+     */
+    public function testIsTrueish(): void
     {
         $cb = _\isTrueish();
 
@@ -83,7 +99,10 @@ class BooleanTest extends TestCase
         static::assertFalse($cb(null));
     }
 
-    public function testIsFalsey()
+    /**
+     * @test
+     */
+    public function testIsFalsey(): void
     {
         $cb = _\isFalsey();
 
@@ -101,7 +120,10 @@ class BooleanTest extends TestCase
         static::assertFalse($cb(null));
     }
 
-    public function testIsBooleanLooking()
+    /**
+     * @test
+     */
+    public function testIsBooleanLooking(): void
     {
         $cb = _\isBooleanLooking();
 

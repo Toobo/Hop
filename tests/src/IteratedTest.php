@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the toobo/hop.
  *
@@ -17,20 +18,23 @@ use Toobo\Hop as _;
 
 class IteratedTest extends TestCase
 {
-    public function testIterateAndVerifyAll()
+    /**
+     * @test
+     */
+    public function testIterateAndVerifyAll(): void
     {
-        $cb = _\iterateAndVerifyAll(function (int $val): bool {
+        $cb = _\iterateAndVerifyAll(static function (int $val): bool {
             return ($val / 2) % 2 === 0;
         });
 
-        $ok = function (): \Generator {
+        $ok = static function (): \Generator {
             yield 4;
             yield 8;
             yield 16;
             yield 32;
         };
 
-        $no = function (): \Generator {
+        $no = static function (): \Generator {
             yield 4;
             yield 6;
         };
@@ -39,20 +43,23 @@ class IteratedTest extends TestCase
         static::assertFalse($cb($no()));
     }
 
-    public function testIterateAndVerifyAny()
+    /**
+     * @test
+     */
+    public function testIterateAndVerifyAny(): void
     {
-        $cb = _\iterateAndVerifyAny(function (int $val): bool {
+        $cb = _\iterateAndVerifyAny(static function (int $val): bool {
             return ($val / 2) % 2 === 0;
         });
 
-        $ok = function (): \Generator {
+        $ok = static function (): \Generator {
             yield 2;
             yield 6;
             yield 12;
             yield 14;
         };
 
-        $no = function (): \Generator {
+        $no = static function (): \Generator {
             yield 2;
             yield 6;
             yield 10;
