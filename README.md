@@ -3,7 +3,7 @@ Hop
 
 ---
 [![license](https://img.shields.io/packagist/l/toobo/Hop.svg?style=flat-square)](http://opensource.org/licenses/MIT)
-[![travis-ci status](https://img.shields.io/travis/Toobo/Hop.svg?style=flat-square)](https://travis-ci.org/Toobo/Hop)
+[![Quality Assurance](https://github.com/Toobo/Hop/actions/workflows/qa.yml/badge.svg)](https://github.com/Toobo/Hop/actions/workflows/qa.yml)
 [![codecov.io](https://img.shields.io/codecov/c/github/Toobo/Hop.svg?style=flat-square)](http://codecov.io/github/Toobo/Hop?branch=master)
 [![release](https://img.shields.io/github/release/Toobo/Hop.svg?style=flat-square)](https://github.com/Toobo/Hop/releases/latest)
 [![PHP version requirement](https://img.shields.io/packagist/php-v/toobo/hop.svg?style=flat-square)](https://packagist.org/packages/toobo/hop)
@@ -17,16 +17,17 @@ Hop
 
 # What?
 
-An "higher order function" is a function that either returns a function or takes a function as argument.
+A "higher order function" is a function that either returns a function or takes a function as argument.
 
-A "functional predicate" is a function that receives one or more arguments (subject) and returns `true` or `false`.
+A "functional predicate" is a function that receives one or more arguments (subject) and returns 
+`true` or `false`.
 
 **This library is a collections of functions that return functional predicates**.
 
 # Why?
 
-In PHP there are some functions like `array_map`, `array_filter`, and so on, that take a functional predicate
-as argument.
+In PHP there are some functions like `array_map`, `array_filter`, and so on, that take a functional 
+predicate as argument.
 
 For example:
 
@@ -56,7 +57,8 @@ $strings = array_filter($data, function($item) {
 One of the functions of this library is `isType()` that accepts a string representing a type 
 and returns a predicate that can be used to check subjects against that type.
 
-Another of the functions of this library is `isNotEmpty()` that returns a predicate that verifies non-empty values.
+Another of the functions of this library is `isNotEmpty()` that returns a predicate that verifies 
+non-empty values.
 
 Another function is `chain()` that takes an arbitrary number of predicates and returns a predicate
 that returns `true` when _all_ the given predicates return true.
@@ -95,8 +97,8 @@ Here a list of all the functions currently provided by library (namespace omitte
  - `isNot($value)`
  - `equals($value)`
  - `notEquals($value)`
- - `match(string $regex)` 
- - `notMatch(string $regex)`
+ - `matches(string $regex)` 
+ - `notMatches(string $regex)`
  - `moreThan(int|float $limit)`
  - `moreThanOrEqual(int|float $limit)`
  - `lessThan(int|float $limit)`
@@ -172,3 +174,7 @@ Here a list of all the functions currently provided by library (namespace omitte
 
 - `applyAfter(callable $transformation, callable $predicate)` Returns a predicate which returns the result of the predicate, after it has been applied the input value, transformed by the `$transformation` function.
 - `applyAfterMethod(string $method, callable $predicate)`
+
+## License
+Hop is open source and released under MIT license. See [LICENSE](./LICENSE) file for more info.
+
